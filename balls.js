@@ -50,7 +50,23 @@ Ball.prototype.update = function(){
 
     this.x += this.velX;
     this.y += this.velY;
-} 
+}
+
+// ball collision
+// just setting the color property of both the circles to a new random color. 
+Ball.prototype.collisionDetect= function(){
+    for (let j=0; j<balls.length; j++){
+        if (!(this === balls[j])) {
+            let dx = this.x - balls[j].x;
+            let dy = this.y - balls[j].y;
+            let distance = Math.sqrt(dx*dx + dy*dy);
+
+            if (distance < (this.size+ balls[j].size)) {
+                balls[j].color = this.color = 'rgba(' + random(0,255) + ',' + random(0,255) + ',' + random(0,255) +','+ (Math.random()).toFixed(1)+')';
+            }
+        }
+    }
+}
 
 // store the balls
 const balls = [];
