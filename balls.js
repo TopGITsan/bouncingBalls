@@ -31,3 +31,27 @@ Ball.prototype.draw = function(){
     ctx.arc(this.x,this.y, this.size, 0, 2* Math.PI);
     ctx.fill();
 }
+
+//to actually start moving the ball, we need an update function of some kind
+//check whether the ball has reached the edge of the canvas. If it has, we reverse the polarity of the relevant velocity to make the ball travel in the opposite direction.
+Ball.prototype.update = function(){
+    if ((this.x + this.size) >= width ) {
+        this.velX = -(this.velX);
+    }
+    if ((this.x - this.size) <= 0) {
+        this.velX = -(this.velX);
+    }
+    if ((this.y + this.size) >= heigth) {
+        this.velY = -(this.velY);
+    }
+    if ((this.y - this.size) <= 0) {
+        this.velY = -(this.velY);
+    }
+
+    this.x += this.velX;
+    this.y += this.velY;
+} 
+
+// store the balls
+const balls = [];
+
