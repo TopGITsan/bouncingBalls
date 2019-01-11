@@ -73,7 +73,8 @@ const balls = [];
 
 // animate the balls
 function loop(){
-    
+    // set the canvas fill color
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
     // cover up the previous frame's drawing before the next one is drawn
     ctx.fillRect(0,0,width,heigth);
     // create a new instance of our Ball()
