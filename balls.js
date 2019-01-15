@@ -88,6 +88,15 @@ class EvilCircle extends Shape {
         this.color = 'white';
         this.size = 10;
     }
+
+    // define a draw method
+    draw () {
+        ctx.beginPath();
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = this.color;
+        ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+        ctx.stroke();
+    };
 }
 
 // define array to store balls
