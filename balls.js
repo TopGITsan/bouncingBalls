@@ -13,15 +13,25 @@ function random(min,max) {
   return num;
 }
 
+// define Shape constructor
+class Shape {
+    constructor(x, y, velX, velY,exists){
+        this.x = x;
+        this.y = y;
+        this.velX = velX;
+        this.velY = velY
+        this.exists = exists;
+    }
+}
+
 // define Ball constructor
 
-function Ball(x, y, velX, velY, color, size) {
-  this.x = x;
-  this.y = y;
-  this.velX = velX;
-  this.velY = velY;
-  this.color = color;
-  this.size = size;
+class Ball extends Shape {
+    constructor(x, y, velX, velY,exists,color,size){
+        super(x, y, velX, velY,exists);
+        this.color = color;
+        this.size = size;
+    }
 }
 
 // define ball draw method
@@ -91,6 +101,7 @@ function loop() {
       random(0 + size,height - size),
       random(-7,7),
       random(-7,7),
+      true,
       'rgb(' + random(0,255) + ',' + random(0,255) + ',' + random(0,255) +')',
       size
     );
