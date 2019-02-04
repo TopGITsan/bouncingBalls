@@ -81,10 +81,8 @@ class Ball extends Shape {
 }
 // define EvilCircle constructor 
 class EvilCircle extends Shape {
-    constructor(x, y, velX, velY,exists){
-        super(x, y, velX, velY,exists);
-        this.velX = 20;
-        this.velY = 20;
+    constructor(x, y,exists){
+        super(x, y, 20, 20,exists);
         this.color = 'white';
         this.size = 10;
     }
@@ -92,11 +90,31 @@ class EvilCircle extends Shape {
     // define a draw method
     draw () {
         ctx.beginPath();
-        ctx.lineWidth = 5;
+        ctx.lineWidth = 3;
         ctx.strokeStyle = this.color;
         ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
         ctx.stroke();
     };
+
+    // look to see whether the evil circle is going to go off the edge of the screen, and stop it from doing so. 
+    checkBounds(){
+        if((this.x + this.size) >= width) {
+            this.x -= this.size;
+            }
+        
+            if((this.x - this.size) <= 0) {
+            this.x += this.size;
+            }
+        
+            if((this.y + this.size) >= height) {
+            this.y -= this.size;
+            }
+        
+            if((this.y - this.size) <= 0) {
+            this.y += this.size;
+            }
+    };
+    
 }
 
 // define array to store balls
@@ -129,11 +147,19 @@ function loop() {
     balls[i].draw();
     balls[i].update();
     balls[i].collisionDetect();
+    evilCircle.draw();
   }
 
   requestAnimationFrame(loop);
 }
 
+
+let size = random(15,20);
+let evilCircle = new EvilCircle(
+    random(0 + size,width - size),
+    random(0 + size,height - size),
+    true
+);
 
 
 loop();
