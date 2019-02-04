@@ -130,6 +130,21 @@ class EvilCircle extends Shape {
             }
         }
     }
+
+    // define EvilCircle collision detect with other balls
+    collisionDetect () {
+        for(var j = 0; j < balls.length; j++) {
+        if( balls[j].exists) {
+            var dx = this.x - balls[j].x;
+            var dy = this.y - balls[j].y;
+            var distance = Math.sqrt(dx * dx + dy * dy);
+    
+            if (distance < this.size + balls[j].size) {
+                balls[j].exists = false;
+            }
+        }
+        }
+    };
 }
 
 // define array to store balls
@@ -158,12 +173,17 @@ function loop() {
     balls.push(ball);
   }
 
-  for(var i = 0; i < balls.length; i++) {
-    balls[i].draw();
-    balls[i].update();
-    balls[i].collisionDetect();
-    evilCircle.draw();
-  }
+    for(var i = 0; i < balls.length; i++) {
+        if (balls[i].exists) {
+            // these functions are only called if the current ball exists
+            balls[i].draw();
+            balls[i].update();
+            balls[i].collisionDetect();
+            evilCircle.draw();
+            evilCircle.checkBounds();
+            evilCircle.collisionDetect();
+        }
+    }
 
   requestAnimationFrame(loop);
 }
