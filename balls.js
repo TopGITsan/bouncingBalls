@@ -151,6 +151,7 @@ class EvilCircle extends Shape {
 
 var balls = [];
 
+const para = document.querySelector('p');
 // define loop that keeps drawing the scene constantly
 
 function loop() {
@@ -185,6 +186,8 @@ function loop() {
         }
     }
 
+    const count = balls.filter(e=> e.exists).length;
+    para.textContent = 'Score: '+(25-count)+' Remaining balls: '+count;
   requestAnimationFrame(loop);
 }
 
