@@ -114,7 +114,22 @@ class EvilCircle extends Shape {
             this.y += this.size;
             }
     };
-    
+
+    // This method will add an onkeydown event listener to the window object so that when certain keyboard keys are pressed, we can move the evil circle around.
+    setControls(){
+        let _this = this;
+        window.onkeydown = (e)=>{
+            if (e.keyCode == 65) {
+                _this.x -= _this.velX;
+            } else if ( e.keyCode == 68) {
+                _this.x += _this.velX;
+            } else if ( e.keyCode == 87) {
+                _this.y -= _this.velY;
+            } else if ( e.keyCode == 83) {
+                _this.y += _this.velY;
+            }
+        }
+    }
 }
 
 // define array to store balls
@@ -160,6 +175,6 @@ let evilCircle = new EvilCircle(
     random(0 + size,height - size),
     true
 );
-
+evilCircle.setControls();
 
 loop();
